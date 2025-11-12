@@ -53,13 +53,31 @@ fi
 sudo systemctl enable docker
 sudo systemctl start docker
 
-# Clone the Git repository
+# Clone the Git repository (public repo, no auth needed)
 if [ -d "$APP_DIR" ]; then
-  echo "Directory $APP_DIR already exists. Pulling latest changes..."
-  cd $APP_DIR && git pull
+  echo "Directory $APP_DIR already exists."
+  cd $APP_DIR
+  if [ -d ".git" ]; then
+    echo "Pulling latest changes..."
+    git pull
+  else
+    echo "Not a git repository. Removing and re-cloning..."
+    cd ..
+    rm -rf $APP_DIR
+    git clone $REPO_URL $APP_DIR
+    if [ $? -ne 0 ]; then
+      echo "Git clone failed. Please ensure repository is accessible."
+      exit 1
+    fi
+    cd $APP_DIR
+  fi
 else
   echo "Cloning repository from $REPO_URL..."
   git clone $REPO_URL $APP_DIR
+  if [ $? -ne 0 ]; then
+    echo "Git clone failed. Please ensure repository is accessible."
+    exit 1
+  fi
   cd $APP_DIR
 fi
 
