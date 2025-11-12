@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Configuration
-DOMAIN_NAME="your-domain.com" # replace with your own
-EMAIL="your-email@example.com" # replace with your own
-REPO_URL="https://github.com/yourusername/turkic.git" # replace with your repo
+DOMAIN_NAME="your-domain.com" # replace
+EMAIL="your-email@example.com" # replace
+REPO_URL="https://github.com/frekler/turkic.git"
 APP_DIR=~/turkic
 SWAP_SIZE="1G"
 
