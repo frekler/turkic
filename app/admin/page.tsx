@@ -74,7 +74,7 @@ export default function AdminPage() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-screen bg-stone-100 p-8">
+      <div className="min-h-screen bg-stone-100/80 p-8">
         <div className="max-w-md mx-auto">
           <div className="bg-stone-50 border-2 border-amber-600 p-8 shadow-lg">
             <h1 className="text-2xl font-serif font-bold text-stone-800 mb-6 text-center">
@@ -110,7 +110,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-stone-100 p-8">
+    <div className="min-h-screen bg-stone-100/80 p-8">
       <div className="max-w-6xl mx-auto">
         <div className="bg-stone-50 border-2 border-amber-600 p-8 shadow-lg">
           <div className="flex justify-between items-center mb-6">

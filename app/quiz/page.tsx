@@ -12,7 +12,7 @@ function QuizContent() {
   const shuffle = searchParams.get('shuffle') !== 'false'; // Default to true
 
   return (
-    <div className="min-h-screen bg-stone-100 p-8">
+    <div className="min-h-screen bg-stone-100/80 p-8">
       <main className="max-w-4xl mx-auto">
         <Link 
             href="/" 

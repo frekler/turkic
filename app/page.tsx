@@ -14,13 +14,13 @@ export default function Home() {
   const [shuffleEnabled, setShuffleEnabled] = useState(false);
 
   return (
-    <div className="min-h-screen bg-stone-100 p-8">
+    <div className="min-h-screen bg-stone-100/80 p-8">
       <main className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-6xl font-serif font-bold text-stone-800 mb-6 tracking-wide">
             {getTranslation('title', selectedLanguage)}
           </h1>
-          <Image src="/hero.jpeg" alt={getTranslation('title', selectedLanguage)} width={1280} height={962} />
+          <Image src="/hero.png" alt={getTranslation('title', selectedLanguage)} width={1280} height={962} />
           <div className="w-32 h-1 bg-amber-600 mx-auto my-13"></div>
           <p className="text-xl text-stone-600 font-serif italic">
             {getTranslation('subtitle', selectedLanguage)}
