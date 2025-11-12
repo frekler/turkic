@@ -8,9 +8,10 @@ import { getTranslation } from '@/app/data/translations';
 
 interface CardProps {
   language?: Language;
+  shuffle?: boolean | null;
 }
 
-export default function Card({ language = 'ru' }: CardProps) {
+export default function Card({ language = 'ru', shuffle = true }: CardProps) {
   const [deck, setDeck] = useState<ClientCardData[]>([]);
   const [loading, setLoading] = useState(true);
   const [cardIdx, setCardIdx] = useState(0);
@@ -44,7 +45,8 @@ export default function Card({ language = 'ru' }: CardProps) {
   useEffect(() => {
     async function loadQuiz() {
       try {
-        const response = await fetch(`/api/quiz?lang=${language}`);
+        const shuffleParam = shuffle !== null ? shuffle : true;
+        const response = await fetch(`/api/quiz?lang=${language}&shuffle=${shuffleParam}`);
         const data: QuizResponse = await response.json();
         setDeck(data.deck);
         setMistakeOnQ(Array.from({ length: data.questionsCount }, () => false));
@@ -55,7 +57,7 @@ export default function Card({ language = 'ru' }: CardProps) {
       }
     }
     loadQuiz();
-  }, [language]);
+  }, [language, shuffle]);
 
   useEffect(() => {
     if (stage !== 'quiz') return;

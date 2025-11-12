@@ -18,6 +18,7 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const language = (searchParams.get('lang') as Language) || 'ru';
+    const shuffle = searchParams.get('shuffle') !== 'false'; // Default to true (shuffled)
     
     const QN = commonQuestions.length;
     const cardsData = language === 'tr' ? serverCardsDataTr : serverCardsData;
@@ -25,9 +26,9 @@ export async function GET(request: Request) {
     const clientSafeData = cardsData.map((card) => {
       const questions = Array.from({ length: QN }).map((_, i) => ({
         text: localizedQuestions[i]?.text[language] ?? commonQuestions[i]?.text ?? `Вопрос ${i + 1}`,
-        answers: shuffleArray((card.answersByQuestion?.[i] || []).map(a => ({ 
-          label: a.label
-        }))),
+        answers: shuffle 
+          ? shuffleArray((card.answersByQuestion?.[i] || []).map(a => ({ label: a.label })))
+          : (card.answersByQuestion?.[i] || []).map(a => ({ label: a.label })),
       }));
       return { 
         id: card.id,
@@ -37,10 +38,10 @@ export async function GET(request: Request) {
       };
     });
 
-    const shuffledDeck = shuffleArray(clientSafeData);
+    const deck = shuffle ? shuffleArray(clientSafeData) : clientSafeData;
     
     return NextResponse.json({ 
-      deck: shuffledDeck,
+      deck,
       questionsCount: QN 
     });
   } catch (error) {

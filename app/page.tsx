@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Button from '@/app/components/Button';
+import Toggle from '@/app/components/Toggle';
 import Image from 'next/image';
 import LanguageSelector from '@/app/components/LanguageSelector';
 import { Language } from '@/app/types';
@@ -10,6 +11,7 @@ import { useState } from 'react';
 
 export default function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState<Language>('ru');
+  const [shuffleEnabled, setShuffleEnabled] = useState(false);
 
   return (
     <div className="min-h-screen bg-stone-100 p-8">
@@ -83,8 +85,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-center">
-            <Link href={`/quiz?lang=${selectedLanguage}`}>
+          <div className="text-center space-y-6">
+            <Toggle
+              checked={shuffleEnabled}
+              onChange={setShuffleEnabled}
+              label={getTranslation('shuffleToggle', selectedLanguage)}
+            />
+            
+            <Link href={`/quiz?lang=${selectedLanguage}&shuffle=${shuffleEnabled}`}>
               <Button 
                 className="bg-amber-700 hover:bg-amber-800 text-amber-50 px-12 py-4 text-xl font-serif font-bold border-2 border-amber-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >

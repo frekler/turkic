@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Тюрк Битиг",
-  description: "Древнетюркское Письмо",
+  title: "Тюрки, Руны, Wалеке...",
+  description: "Тюрк Битиг •••• Древнетюркское Письмо",
 };
 
 export default function RootLayout({

@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 function QuizContent() {
   const searchParams = useSearchParams();
   const language = (searchParams.get('lang') as Language) || 'ru';
+  const shuffle = searchParams.get('shuffle') !== 'false'; // Default to true
 
   return (
     <div className="min-h-screen bg-stone-100 p-8">
@@ -28,7 +29,8 @@ function QuizContent() {
           </div>
           <div className="w-40"></div> {/* Spacer for centering */}
         </div>
-        <Card language={language} />
+        
+        <Card language={language} shuffle={shuffle} />
       </main>
     </div>
   );

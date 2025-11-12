@@ -159,6 +159,46 @@ export const translations = {
   turkish: {
     ru: "Турецкий", 
     tr: "Türkçe"
+  },
+
+  // Quiz mode selector
+  selectMode: {
+    ru: "Выберите режим игры",
+    tr: "Oyun modunu seçin"
+  },
+  selectModeDescription: {
+    ru: "Как вы хотите играть?",
+    tr: "Nasıl oynamak istiyorsunuz?"
+  },
+  shuffledMode: {
+    ru: "Случайный порядок",
+    tr: "Rastgele sıra"
+  },
+  shuffledModeDescription: {
+    ru: "Руны будут показаны в случайном порядке для большего вызова",
+    tr: "Runlar daha fazla meydan okuma için rastgele sırada gösterilecek"
+  },
+  chooseShuffled: {
+    ru: "Играть вразброс",
+    tr: "Rastgele oyna"
+  },
+  orderedMode: {
+    ru: "По порядку",
+    tr: "Sırayla"
+  },
+  orderedModeDescription: {
+    ru: "Руны будут показаны в исходном порядке для изучения",
+    tr: "Runlar öğrenme için orijinal sırada gösterilecek"
+  },
+  chooseOrdered: {
+    ru: "Играть по порядку",
+    tr: "Sırayla oyna"
+  },
+
+  // Toggle labels
+  shuffleToggle: {
+    ru: "Перемешать руны",
+    tr: "Rünleri karıştır"
   }
 };
 
