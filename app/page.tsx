@@ -1,63 +1,104 @@
-import Image from "next/image";
+'use client';
+
+import Link from 'next/link';
+import Button from '@/app/components/Button';
+import Image from 'next/image';
+import LanguageSelector from '@/app/components/LanguageSelector';
+import { Language } from '@/app/types';
+import { getTranslation } from '@/app/data/translations';
+import { useState } from 'react';
 
 export default function Home() {
+  const [selectedLanguage, setSelectedLanguage] = useState<Language>('ru');
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-stone-100 p-8">
+      <main className="max-w-4xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-6xl font-serif font-bold text-stone-800 mb-6 tracking-wide">
+            {getTranslation('title', selectedLanguage)}
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <Image src="/hero.jpeg" alt={getTranslation('title', selectedLanguage)} width={1280} height={962} />
+          <div className="w-32 h-1 bg-amber-600 mx-auto my-13"></div>
+          <p className="text-xl text-stone-600 font-serif italic">
+            {getTranslation('subtitle', selectedLanguage)}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <LanguageSelector 
+          selectedLanguage={selectedLanguage} 
+          onLanguageChange={setSelectedLanguage} 
+        />
+
+        <div className="bg-stone-50 border-2 border-stone-300 shadow-2xl p-12 mb-12 relative">
+          {/* Ancient manuscript corner decorations */}
+          <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-amber-600"></div>
+          <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-amber-600"></div>
+          <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-amber-600"></div>
+          <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-amber-600"></div>
+          
+          {/* <h2 className="text-3xl font-serif font-bold text-stone-800 mb-8 text-center border-b-2 border-amber-600 pb-4">
+            Испытание знаний
+          </h2> */}
+          
+          <div className="space-y-6 text-stone-700 mb-10">
+            <p className="text-lg font-serif leading-relaxed text-center">
+              {getTranslation('quote', selectedLanguage)}
+            </p>
+            
+            <div className="bg-amber-50 border-l-4 border-amber-600 p-8 my-8">
+              <h3 className="text-xl font-serif font-bold text-amber-900 mb-6 text-center">
+                {getTranslation('rulesTitle', selectedLanguage)}
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <ul className="space-y-3 text-amber-800 font-serif">
+                  <li className="flex items-start">
+                    <span className="text-amber-600 mr-3 font-bold">1.</span>
+                    {getTranslation('rule1', selectedLanguage)}
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-600 mr-3 font-bold">2.</span>
+                    {getTranslation('rule2', selectedLanguage)}
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-600 mr-3 font-bold">3.</span>
+                    {getTranslation('rule3', selectedLanguage)}
+                  </li>
+                </ul>
+                {/* <ul className="space-y-3 text-amber-800 font-serif">
+                  <li className="flex items-start">
+                    <span className="text-amber-600 mr-3 font-bold">IV.</span>
+                    При четвёртой ошибке — новое испытание
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-600 mr-3 font-bold">V.</span>
+                    За точность — почёт и стрелы
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-600 mr-3 font-bold">VI.</span>
+                    В конце — код для получения дара
+                  </li>
+                </ul> */}
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Link href={`/quiz?lang=${selectedLanguage}`}>
+              <Button 
+                className="bg-amber-700 hover:bg-amber-800 text-amber-50 px-12 py-4 text-xl font-serif font-bold border-2 border-amber-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
+                {getTranslation('startButton', selectedLanguage)}
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <p className="text-stone-500 font-serif italic">
+            {getTranslation('wisdomText', selectedLanguage)}
+          </p>
+          <div className="w-16 h-1 bg-amber-600 mx-auto mt-4"></div>
         </div>
       </main>
     </div>
