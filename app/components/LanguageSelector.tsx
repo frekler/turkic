@@ -11,7 +11,7 @@ interface LanguageSelectorProps {
 export default function LanguageSelector({ selectedLanguage, onLanguageChange }: LanguageSelectorProps) {
   return (
 
-    <div className="p-6 mb-8 text-center">
+    <div className="p-3 mb-8 text-center">
       <div className="flex justify-center space-x-4"><svg 
         version="1.1" 
         id="Optimized" 
