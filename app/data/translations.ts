@@ -148,17 +148,27 @@ export const translations = {
   },
 
   // Language selector
-  selectLanguage: {
-    ru: "Выберите язык",
-    tr: "Dil seçin"
-  },
-  russian: {
-    ru: "Русский",
-    tr: "Rusça"
+  // selectLanguage: {
+  //   ru: "Выберите язык",
+  //   tr: "Dil seçin"
+  // },
+  // russian: {
+  //   ru: "Русский",
+  //   tr: "Rusça"
+  // },
+  // turkish: {
+  //   ru: "Турецкий", 
+  //   tr: "Türkçe"
+  // },
+
+
+    russian: {
+    ru: "RU",
+    tr: "RU"
   },
   turkish: {
-    ru: "Турецкий", 
-    tr: "Türkçe"
+    ru: "TR", 
+    tr: "TR"
   },
 
   // Quiz mode selector

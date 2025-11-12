@@ -405,10 +405,10 @@ export default function Card({ language = 'ru', shuffle = true }: CardProps) {
             aria-modal="true"
           >
             {/* Ancient manuscript corner decorations */}
-            <div className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-amber-600"></div>
+            {/* <div className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-amber-600"></div>
             <div className="absolute top-2 right-2 w-6 h-6 border-r-2 border-t-2 border-amber-600"></div>
             <div className="absolute bottom-2 left-2 w-6 h-6 border-l-2 border-b-2 border-amber-600"></div>
-            <div className="absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-amber-600"></div>
+            <div className="absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-amber-600"></div> */}
             
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-serif font-bold text-stone-800 border-b-2 border-amber-600 pb-2">

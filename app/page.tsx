@@ -16,6 +16,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-stone-100/80 p-8">
       <main className="max-w-4xl mx-auto">
+
+        <LanguageSelector 
+          selectedLanguage={selectedLanguage} 
+          onLanguageChange={setSelectedLanguage} 
+        />
+
         <div className="text-center mb-16">
           <h1 className="text-6xl font-serif font-bold text-stone-800 mb-6 tracking-wide">
             {getTranslation('title', selectedLanguage)}
@@ -27,10 +33,7 @@ export default function Home() {
           </p>
         </div>
 
-        <LanguageSelector 
-          selectedLanguage={selectedLanguage} 
-          onLanguageChange={setSelectedLanguage} 
-        />
+
 
         <div className="bg-stone-50 border-2 border-stone-300 shadow-2xl p-12 mb-12 relative">
           {/* Ancient manuscript corner decorations */}
@@ -52,7 +55,7 @@ export default function Home() {
               <h3 className="text-xl font-serif font-bold text-amber-900 mb-6 text-center">
                 {getTranslation('rulesTitle', selectedLanguage)}
               </h3>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid gap-4">
                 <ul className="space-y-3 text-amber-800 font-serif">
                   <li className="flex items-start">
                     <span className="text-amber-600 mr-3 font-bold">1.</span>
