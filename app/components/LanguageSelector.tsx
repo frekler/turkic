@@ -11,7 +11,7 @@ interface LanguageSelectorProps {
 export default function LanguageSelector({ selectedLanguage, onLanguageChange }: LanguageSelectorProps) {
   return (
 
-    <div className="p-3 mb-8 text-center">
+    <div className="p-3 mb-4 text-center">
       <div className="flex justify-center space-x-4"><svg 
         version="1.1" 
         id="Optimized" 
@@ -36,8 +36,8 @@ export default function LanguageSelector({ selectedLanguage, onLanguageChange }:
           onClick={() => onLanguageChange('ru')}
           className={`duration-200 ${
             selectedLanguage === 'ru'
-              ? 'underline text-amber-900'
-              : 'text-amber-900 cursor-pointer'
+              ? 'text-amber-900 font-bold'
+              : 'underline text-amber-900 cursor-pointer'
           }`}
         >
           {getTranslation('russian', selectedLanguage)}
@@ -46,8 +46,8 @@ export default function LanguageSelector({ selectedLanguage, onLanguageChange }:
           onClick={() => onLanguageChange('tr')}
           className={`duration-200 ${
             selectedLanguage === 'tr'
-              ? 'underline text-amber-900'
-              : 'text-amber-900 cursor-pointer'
+              ? 'text-amber-900 font-bold'
+              : 'underline text-amber-900 cursor-pointer'
           }`}
         >
           {getTranslation('turkish', selectedLanguage)}
