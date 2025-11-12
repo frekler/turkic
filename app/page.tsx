@@ -33,8 +33,6 @@ export default function Home() {
           </p>
         </div>
 
-
-
         <div className="bg-stone-50 border-2 border-stone-300 shadow-2xl p-12 mb-12 relative">
           {/* Ancient manuscript corner decorations */}
           <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-amber-600"></div>
