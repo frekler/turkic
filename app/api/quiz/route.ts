@@ -14,6 +14,14 @@ function shuffleArray<T>(arr: T[]): T[] {
   return a;
 }
 
+function sortByCardNumber<T extends { id: string }>(arr: T[]): T[] {
+  return arr.slice().sort((a, b) => {
+    const numA = parseInt(a.id.replace('card-', ''));
+    const numB = parseInt(b.id.replace('card-', ''));
+    return numA - numB;
+  });
+}
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -38,7 +46,8 @@ export async function GET(request: Request) {
       };
     });
 
-    const deck = shuffle ? shuffleArray(clientSafeData) : clientSafeData;
+    const orderedByCardNumber = sortByCardNumber(clientSafeData);
+    const deck = shuffle ? shuffleArray(orderedByCardNumber) : orderedByCardNumber;
     
     return NextResponse.json({ 
       deck,
