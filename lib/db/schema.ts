@@ -4,7 +4,7 @@ export const claims = sqliteTable('claims', {
   id: text('id').primaryKey(),
   name: text('name').notNull(),
   code: text('code').notNull().unique(),
-  timestamp: integer('timestamp', { mode: 'timestamp' }).notNull(),
+  timestamp: integer('timestamp').notNull(),
 });
 
 export type Claim = typeof claims.$inferSelect;

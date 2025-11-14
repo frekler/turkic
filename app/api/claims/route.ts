@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
       id: `claim-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`,
       name: trimmedName,
       code,
-      timestamp: new Date(),
+      timestamp: Date.now(),
     };
 
     await db.insert(schema.claims).values(newClaim);
