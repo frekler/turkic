@@ -163,12 +163,12 @@ export const translations = {
 
 
     russian: {
-    ru: "RU",
-    tr: "RU"
+    ru: "На русском",
+    tr: "На русском"
   },
   turkish: {
-    ru: "TR", 
-    tr: "TR"
+    ru: "Türkçe'de", 
+    tr: "Türkçe'de"
   },
 
   // Quiz mode selector
@@ -209,6 +209,10 @@ export const translations = {
   shuffleToggle: {
     ru: "Перемешать руны",
     tr: "Rünleri karıştır"
+  },
+  modeToggle: {
+    ru: "Сложный режим",
+    tr: "Zor mod"
   }
 };
 

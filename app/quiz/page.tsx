@@ -10,6 +10,7 @@ function QuizContent() {
   const searchParams = useSearchParams();
   const language = (searchParams.get('lang') as Language) || 'ru';
   const shuffle = searchParams.get('shuffle') !== 'false'; // Default to true
+  const mode = searchParams.get('mode') || 'hard'; // Default to hard
 
   return (
     <div className="min-h-screen bg-stone-100/80 p-8">
@@ -30,7 +31,7 @@ function QuizContent() {
           <div className="w-40"></div> {/* Spacer for centering */}
         </div>
         
-        <Card language={language} shuffle={shuffle} />
+        <Card language={language} shuffle={shuffle} mode={mode} />
       </main>
     </div>
   );

@@ -10,6 +10,7 @@ export const serverCardsData: CardData[] = [
       [
         { label: "Sessiz", correct: false },
         { label: "Sesli", correct: true },
+        { label: "Diftong", correct: false },
       ],
       [
         { label: "Yumuşak", correct: true },
@@ -676,6 +677,7 @@ export const serverCardsData: CardData[] = [
       [
         { label: "Sessiz", correct: true },
         { label: "Sesli", correct: false },
+        { label: "Diftong", correct: false },
       ],
       [
         { label: "Yumuşak", correct: true },
@@ -698,6 +700,7 @@ export const serverCardsData: CardData[] = [
       [
         { label: "Sessiz", correct: true },
         { label: "Sesli", correct: false },
+        { label: "Diftong", correct: false },
       ],
       [
         { label: "Yumuşak", correct: false },
@@ -720,6 +723,7 @@ export const serverCardsData: CardData[] = [
       [
         { label: "Sessiz", correct: true },
         { label: "Sesli", correct: false },
+        { label: "Diftong", correct: false },
       ],
       [
         { label: "Yumuşak", correct: false },

@@ -9,9 +9,10 @@ import { getTranslation } from '@/app/data/translations';
 interface CardProps {
   language?: Language;
   shuffle?: boolean | null;
+  mode?: string;
 }
 
-export default function Card({ language = 'ru', shuffle = true }: CardProps) {
+export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }: CardProps) {
   const [deck, setDeck] = useState<ClientCardData[]>([]);
   const [loading, setLoading] = useState(true);
   const [cardIdx, setCardIdx] = useState(0);
@@ -46,7 +47,7 @@ export default function Card({ language = 'ru', shuffle = true }: CardProps) {
     async function loadQuiz() {
       try {
         const shuffleParam = shuffle !== null ? shuffle : true;
-        const response = await fetch(`/api/quiz?lang=${language}&shuffle=${shuffleParam}`);
+        const response = await fetch(`/api/quiz?lang=${language}&shuffle=${shuffleParam}&mode=${mode}`);
         const data: QuizResponse = await response.json();
         setDeck(data.deck);
         setMistakeOnQ(Array.from({ length: data.questionsCount }, () => false));
@@ -337,58 +338,166 @@ export default function Card({ language = 'ru', shuffle = true }: CardProps) {
       )}
 
       {stage === 'name' && (
-        <div className="bg-stone-50 border-2 border-amber-600 p-8 text-center shadow-lg">
-          <h2 className="text-3xl font-serif font-bold text-stone-800 mb-6">
-{getTranslation('warComplete', language)}
-          </h2>
-          <p className="text-lg font-serif text-stone-700 mb-8">
-            {/* Вы успешно прошли все этапы изучения древнетюркского письма.
-            <br /> */}
-{getTranslation('enterTelegram', language)}
-          </p>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder={getTranslation('telegramPlaceholder', language)}
-            className="w-full max-w-md mx-auto p-4 mb-6 font-serif text-lg border-2 border-amber-600 bg-amber-50 text-stone-800 placeholder-stone-500"
-          />
-          <Button 
-            onClick={submitName} 
-            disabled={submitting}
-            className="bg-amber-700 hover:bg-amber-800 text-amber-50 px-8 py-4 font-serif font-bold border-2 border-amber-800 shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            {submitting ? getTranslation('saving', language) : getTranslation('getGiftCode', language)}
-          </Button>
+        <div className="space-y-8">
+          <div className="bg-stone-50 border-2 border-amber-600 p-8 text-center shadow-lg">
+            <h2 className="text-3xl font-serif font-bold text-stone-800 mb-6">
+  {getTranslation('warComplete', language)}
+            </h2>
+            <p className="text-lg font-serif text-stone-700 mb-8">
+              {/* Вы успешно прошли все этапы изучения древнетюркского письма.
+              <br /> */}
+  {getTranslation('enterTelegram', language)}
+            </p>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder={getTranslation('telegramPlaceholder', language)}
+              className="w-full max-w-md mx-auto p-4 mb-6 font-serif text-lg border-2 border-amber-600 bg-amber-50 text-stone-800 placeholder-stone-500"
+            />
+            <Button 
+              onClick={submitName} 
+              disabled={submitting}
+              className="bg-amber-700 hover:bg-amber-800 text-amber-50 px-8 py-4 font-serif font-bold border-2 border-amber-800 shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              {submitting ? getTranslation('saving', language) : getTranslation('getGiftCode', language)}
+            </Button>
+          </div>
+
+          {/* Solved Runes Table */}
+          <div className="bg-stone-50 border-2 border-amber-600 p-8 shadow-lg">
+            <h3 className="text-2xl font-serif font-bold text-stone-800 border-b-2 border-amber-600 pb-2 mb-6 text-center">
+              {getTranslation('solvedRunes', language)}
+            </h3>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-amber-100 border-2 border-amber-600">
+                    <th className="p-4 text-left font-serif font-bold text-stone-800 border-r border-amber-600">{getTranslation('rune', language)}</th>
+                    <th className="p-4 text-left font-serif font-bold text-stone-800">{getTranslation('sound', language)}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {deck.map((c, i) => {
+                    const reached = i <= cardIdx;
+                    const hasCompletedSound = correctAnswers[`${i}-2`];
+
+                    return (
+                      <tr key={i} className="border-b border-amber-300 hover:bg-amber-50">
+                        <td className="p-4 border-r border-amber-300">
+                          {reached ? (
+                            <div className="flex justify-center">
+                              <Image
+                                src={c.image}
+                                alt={c.title || `Карточка ${i + 1}`}
+                                width={80}
+                                height={53}
+                                className="border border-amber-600 rounded"
+                              />
+                            </div>
+                          ) : (
+<span className="text-stone-400 font-serif">—</span>
+                          )}
+                        </td>
+
+                        <td className="p-4 border-r border-amber-300 font-serif text-stone-800">
+                          {hasCompletedSound ? (
+                            <span className="font-semibold">{correctAnswers[`${i}-2`]}</span>
+                          ) : (
+<span className="text-stone-400">—</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       )}
 
       {stage === 'done' && (
-        <div className="bg-stone-50 border-2 border-amber-600 p-8 text-center shadow-lg">
-          <h2 className="text-3xl font-serif font-bold text-stone-800 mb-6">
-{getTranslation('done', language)}
-          </h2>
-          <div className="bg-amber-50 border-2 border-amber-600 p-6 mb-6">
-            <p className="text-lg font-serif text-stone-700 mb-4">{getTranslation('yourGiftCode', language)}</p>
-            <p className="text-3xl font-serif font-bold text-amber-900 tracking-wider">{resultCode}</p>
+        <div className="space-y-8">
+<div className="bg-stone-50 border-2 border-amber-600 p-8 text-center shadow-lg">
+            <h2 className="text-3xl font-serif font-bold text-stone-800 mb-6">
+  {getTranslation('done', language)}
+            </h2>
+            <div className="bg-amber-50 border-2 border-amber-600 p-6 mb-6">
+              <p className="text-lg font-serif text-stone-700 mb-4">{getTranslation('yourGiftCode', language)}</p>
+              <p className="text-3xl font-serif font-bold text-amber-900 tracking-wider">{resultCode}</p>
+            </div>
+            <div className="space-y-4 font-serif text-stone-700">
+              <p className="text-lg">
+                {getTranslation('saveCode', language)}
+              </p>
+              <p>
+                {getTranslation('contactInfo', language)}
+                <br />
+                <a href="https://t.me/turk_donat_bot" className="text-amber-700 hover:text-amber-900 font-bold">
+                  @turk_donat_bot
+                </a>
+              </p>
+              <p>
+                {getTranslation('subscribeText', language)}
+                <br />
+                <a href="https://t.me/turkic_arck" className="text-amber-700 hover:text-amber-900 font-bold">
+                  {getTranslation('channelName', language)}
+                </a>
+              </p>
+            </div>
           </div>
-          <div className="space-y-4 font-serif text-stone-700">
-            <p className="text-lg">
-              {getTranslation('saveCode', language)}
-            </p>
-            <p>
-              {getTranslation('contactInfo', language)}
-              <br />
-              <a href="https://t.me/turk_donat_bot" className="text-amber-700 hover:text-amber-900 font-bold">
-                @turk_donat_bot
-              </a>
-            </p>
-            <p>
-              {getTranslation('subscribeText', language)}
-              <br />
-              <a href="https://t.me/turkic_arck" className="text-amber-700 hover:text-amber-900 font-bold">
-                {getTranslation('channelName', language)}
-              </a>
-            </p>
+
+          {/* Solved Runes Table */}
+          <div className="bg-stone-50 border-2 border-amber-600 p-8 shadow-lg">
+            <h3 className="text-2xl font-serif font-bold text-stone-800 border-b-2 border-amber-600 pb-2 mb-6 text-center">
+              {getTranslation('solvedRunes', language)}
+            </h3>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-amber-100 border-2 border-amber-600">
+                    <th className="p-4 text-left font-serif font-bold text-stone-800 border-r border-amber-600">{getTranslation('rune', language)}</th>
+                    <th className="p-4 text-left font-serif font-bold text-stone-800">{getTranslation('sound', language)}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {deck.map((c, i) => {
+                    const reached = i <= cardIdx || stage === 'done';
+                    const hasCompletedSound = correctAnswers[`${i}-2`];
+
+                    return (
+                      <tr key={i} className="border-b border-amber-300 hover:bg-amber-50">
+                        <td className="p-4 border-r border-amber-300">
+                          {reached ? (
+                            <div className="flex justify-center">
+                              <Image
+                                src={c.image}
+                                alt={c.title || `Карточка ${i + 1}`}
+                                width={80}
+                                height={53}
+                                className="border border-amber-600 rounded"
+                              />
+                            </div>
+                          ) : (
+<span className="text-stone-400 font-serif">—</span>
+                          )}
+                        </td>
+
+                        <td className="p-4 border-r border-amber-300 font-serif text-stone-800">
+                          {hasCompletedSound ? (
+                            <span className="font-semibold">{correctAnswers[`${i}-2`]}</span>
+                          ) : (
+<span className="text-stone-400">—</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}
