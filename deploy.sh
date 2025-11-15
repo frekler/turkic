@@ -81,8 +81,15 @@ else
   cd $APP_DIR
 fi
 
-# Create data directory for SQLite database
+# Create data directory for SQLite database with proper permissions
 mkdir -p "$APP_DIR/data"
+sudo chown -R 1001:1001 "$APP_DIR/data"
+sudo chmod 775 "$APP_DIR/data"
+
+# If claims.db exists, fix its permissions too
+if [ -f "$APP_DIR/data/claims.db" ]; then
+  sudo chmod 664 "$APP_DIR/data/claims.db"
+fi
 
 # Create minimal .env file (app uses SQLite, no database credentials needed)
 echo "NODE_ENV=production" > "$APP_DIR/.env"

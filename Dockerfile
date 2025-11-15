@@ -1,7 +1,7 @@
 FROM node:24-alpine AS base
 
-# Install dependencies for better-sqlite3
-RUN apk add --no-cache python3 make g++
+# Install dependencies for better-sqlite3 and health check
+RUN apk add --no-cache python3 make g++ wget
 
 # Stage 1: Install dependencies
 FROM base AS deps
