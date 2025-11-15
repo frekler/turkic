@@ -1,5 +1,8 @@
 FROM node:24-alpine AS base
 
+# Install dependencies for better-sqlite3
+RUN apk add --no-cache python3 make g++
+
 # Stage 1: Install dependencies
 FROM base AS deps
 WORKDIR /app
@@ -25,7 +28,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
+RUN mkdir -p /app/data && chown nextjs:nodejs /app/data && chmod 755 /app/data
 
 USER nextjs
 
