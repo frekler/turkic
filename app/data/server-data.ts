@@ -909,16 +909,6 @@ export const serverCardsData: CardData[] = [
         { label: "Гласная", correct: false },
         { label: "Разделительный знак", correct: true },
       ],
-      [
-        { label: "Мягкий", correct: false },
-        { label: "Твёрдый", correct: true },
-        { label: "Парный", correct: false },
-      ],
-      [
-        { label: "ОРТЫ", correct: false },
-        { label: "НАЙ", correct: true },
-        { label: "ОКУ", correct: false },
-      ],
     ],
   },
 
