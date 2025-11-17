@@ -19,8 +19,8 @@ export const translations = {
     tr: "Rune resmi altında sorulara cevap veriyorsunuz."
   },
   rule2: {
-    ru: "За правильный ответ - 1 стрела. Неправильный ответ - это ваша рана. На 5-ой ране игра начинается заново.",
-    tr: "Doğru cevap için 1 ok. Yanlış cevap yaranızdır. 5. yarada oyun yeniden başlar."
+    ru: "За правильный ответ - 1 стрела. Неправильный ответ - это ваша рана. На 4-ой ране игра начинается заново.",
+    tr: "Doğru cevap için 1 ok. Yanlış cevap yaranızdır. 4. yarada oyun yeniden başlar."
   },
   rule3: {
     ru: "В результате войны вам надо получать стрелы и стать Каганом, - достигнув этого - получите ДАР.",
