@@ -58,7 +58,7 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
       }
     }
     loadQuiz();
-  }, [language, shuffle]);
+  }, [language, shuffle, mode]);
 
   useEffect(() => {
     if (stage !== 'quiz') return;
@@ -75,7 +75,8 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
   const resetQuiz = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/quiz?lang=${language}`);
+      const shuffleParam = shuffle !== null ? shuffle : true;
+      const response = await fetch(`/api/quiz?lang=${language}&shuffle=${shuffleParam}&mode=${mode}`);
       const data: QuizResponse = await response.json();
       setDeck(data.deck);
       setCardIdx(0);
