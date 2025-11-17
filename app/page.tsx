@@ -29,9 +29,15 @@ export default function Home() {
           </h1>
           <Image src="/hero.png" alt={getTranslation('title', selectedLanguage)} width={1280} height={962} />
           <div className="w-32 h-1 bg-amber-600 mx-auto my-13"></div>
-          <p className="text-xl text-stone-600 font-serif italic">
+
+          {/* <p className="text-xl text-stone-600 font-serif italic">
             {getTranslation('subtitle', selectedLanguage)}
-          </p>
+          </p> */}
+
+          <p className="text-xl text-stone-600 font-serif italic leading-relaxed text-center">
+              {getTranslation('quote', selectedLanguage)}
+            </p>
+
         </div>
 
         <div className="bg-stone-50 border-2 border-stone-300 shadow-2xl p-12 mb-12 relative">
@@ -46,9 +52,9 @@ export default function Home() {
           </h2> */}
           
           <div className="space-y-6 text-stone-700 mb-10">
-            <p className="text-lg font-serif leading-relaxed text-center">
+            {/* <p className="text-lg font-serif leading-relaxed text-center">
               {getTranslation('quote', selectedLanguage)}
-            </p>
+            </p> */}
             
             <div className="bg-amber-50 border-l-4 border-amber-600 p-8 my-8">
               <h3 className="text-xl font-serif font-bold text-amber-900 mb-6 text-center">
@@ -111,9 +117,9 @@ export default function Home() {
         </div>
 
         <div className="text-center">
-          <p className="text-stone-500 font-serif italic">
+          {/* <p className="text-stone-500 font-serif italic">
             {getTranslation('wisdomText', selectedLanguage)}
-          </p>
+          </p> */}
           <div className="w-16 h-1 bg-amber-600 mx-auto mt-4"></div>
         </div>
       </main>

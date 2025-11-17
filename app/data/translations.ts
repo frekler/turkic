@@ -3,8 +3,8 @@ import { Language } from '@/app/types';
 export const translations = {
   // Main page
   title: {
-    ru: "Тюрки, Руны, Wалеке...",
-    tr: "Türkler, Runlar, Wалеке..."
+    ru: "Тюрки, Руны, Waleke....",
+    tr: "Türkler, Runlar, Waleke...."
   },
   subtitle: {
     ru: "Тюрк Битиг •••• Древнетюркское Письмо",
@@ -27,16 +27,20 @@ export const translations = {
     tr: "Savaş sonucunda oklar toplamalı ve Kağan olmalısınız - bunu başararak HEDİYE alacaksınız."
   },
   startButton: {
-    ru: "Начать войну!",
-    tr: "Savaşı başlat!"
+    ru: "Начать бой с Демонами!",
+    // tr: "Savaşı başlat!"
+    tr: "Şeytanlarla savaşa başla!"
+
   },
   wisdomText: {
     ru: "Пусть мудрость предков ведёт вас по пути знаний",
     tr: "Ataların bilgeliği sizi bilgi yolunda yönlendirsin"
   },
   quote: {
-    ru: "\"Ночь не проходила, день не заканчивался, без того, чтобы красная кровь не проливалась, без того, чтобы чёрный пот не бежал...\". Мудрый Тоньюкук, строка 52.",
-    tr: "\"Gece geçmez, gün bitmezdi ki, kızıl kan dökülmesin, kara ter akmasın...\". Bilge Tonyukuk, satır 52."
+    // ru: "\"Ночь не проходила, день не заканчивался, без того, чтобы красная кровь не проливалась, без того, чтобы чёрный пот не бежал...\". Мудрый Тоньюкук, строка 52.",
+    ru: "\"Ночь не проходила, день не заканчивался, без того, чтобы не лилась кровь, без того, чтобы не тёк чёрный пот...\" Мудрый Тоньюкук, стих 52.",
+    // tr: "\"Gece geçmez, gün bitmezdi ki, kızıl kan dökülmesin, kara ter akmasın...\". Bilge Tonyukuk, satır 52."
+    tr: "\"Gece geçmedi, gün bitmedi, kan akmadı, kara ter akmadı...\" Bilge Tonyukuk, 52. ayet."
   },
 
   // Quiz interface

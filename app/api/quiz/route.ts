@@ -43,11 +43,11 @@ export async function GET(request: Request) {
     const shuffle = searchParams.get('shuffle') !== 'false'; // Default to true (shuffled)
     const mode = searchParams.get('mode') || 'easy'; // Default to easy mode
     
-    const QN = commonQuestions.length;
     const cardsData = language === 'tr' ? serverCardsDataTr : serverCardsData;
     
     const clientSafeData = cardsData.map((card) => {
-      const questions = Array.from({ length: QN }).map((_, i) => {
+      const actualQuestionCount = card.answersByQuestion?.length || 0;
+      const questions = Array.from({ length: actualQuestionCount }).map((_, i) => {
         const questionAnswers = card.answersByQuestion?.[i] || [];
         let processedAnswers;
         
@@ -75,9 +75,11 @@ export async function GET(request: Request) {
     const orderedByCardNumber = sortByCardNumber(clientSafeData);
     const deck = shuffle ? shuffleArray(orderedByCardNumber) : orderedByCardNumber;
     
+    const totalQuestionsCount = deck.reduce((acc, card) => acc + card.questions.length, 0);
+    
     return NextResponse.json({ 
       deck,
-      questionsCount: QN 
+      questionsCount: totalQuestionsCount 
     });
   } catch (error) {
     console.error('Error generating quiz:', error);

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Тюрки, Руны, Wалеке...",
+  title: "Тюрки, Руны, Waleke....",
   description: "Тюрк Битиг •••• Древнетюркское Письмо",
 };
 

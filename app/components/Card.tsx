@@ -260,17 +260,17 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
               />
             </div>
           </div>
-          <h2 className="text-2xl font-serif font-bold text-stone-800 text-center mb-8 border-b-2 border-amber-600 pb-4">
+          {/* <h2 className="text-2xl font-serif font-bold text-stone-800 text-center mb-8 border-b-2 border-amber-600 pb-4">
 {getTranslation('whichRune', language)}
-          </h2>
+          </h2> */}
 
           {currentCard.questions.slice(0, revealedIdx + 1).map((q, i) => {
             const isActive = i === revealedIdx;
             return (
               <div key={i} className={`mb-8 ${isActive ? 'border-l-4 border-amber-600 pl-6' : 'opacity-75'}`}>
-                <h3 className="text-xl font-serif font-bold text-stone-800 mb-4 border-b border-amber-300 pb-2">
+                {/* <h3 className="text-xl font-serif font-bold text-stone-800 mb-4 border-b border-amber-300 pb-2">
                   {q.text}
-                </h3>
+                </h3> */}
                 <div className="grid gap-3">
                   {q.answers.map((ans, j) => {
                     const key = `${cardIdx}-${i}-${ans.label}`;
@@ -279,6 +279,9 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
                       k.startsWith(`${cardIdx}-${i}-`) && clickedAnswers[k] === 'correct'
                     );
                     const disabled = !isActive || questionAnswered;
+                    
+                    // Hide other runes after correct answer is selected
+                    const hideOtherRunes = !isActive && questionAnswered && state !== 'correct';
                     
                     let buttonClasses = 'w-full p-4 font-serif font-semibold border-2 transition-all duration-200 ';
                     if (state === 'correct') {
@@ -289,6 +292,11 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
                       buttonClasses += 'bg-stone-200 border-stone-400 text-stone-600 cursor-not-allowed';
                     } else {
                       buttonClasses += 'bg-amber-50 border-amber-600 text-amber-900 hover:bg-amber-100 hover:shadow-md cursor-pointer';
+                    }
+
+                    // Don't render the button if it should be hidden
+                    if (hideOtherRunes) {
+                      return null;
                     }
 
                     return (
@@ -306,7 +314,7 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
                     );
                   })}
                 </div>
-                {!isActive && (
+                {/* {!isActive && (
                   <div className="mt-3 text-center font-serif text-sm">
                     {mistakeOnQ[i] ? (
                       <span className="text-amber-700 font-semibold">⚠ {getTranslation('wounded', language)}</span>
@@ -314,7 +322,7 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
                       <span className="text-emerald-700 font-semibold">✓ {getTranslation('perfect', language)}</span>
                     )}
                   </div>
-                )}
+                )} */}
               </div>
             );
           })}
