@@ -74,6 +74,10 @@ export default function Home() {
                     <span className="text-amber-600 mr-3 font-bold">3.</span>
                     {getTranslation('rule3', selectedLanguage)}
                   </li>
+                                    <li className="flex items-start">
+                    <span className="text-amber-600 mr-3 font-bold">4.</span>
+                    {getTranslation('rule4', selectedLanguage)}
+                  </li>
                 </ul>
                 {/* <ul className="space-y-3 text-amber-800 font-serif">
                   <li className="flex items-start">

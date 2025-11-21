@@ -19,12 +19,16 @@ export const translations = {
     tr: "Rune resmi altında sorulara cevap veriyorsunuz."
   },
   rule2: {
-    ru: "За разгаданную руну - 1 удар по Демонам. Неправильный ответ - это ваша полученная рана. На 4-ой ране (а в сложном режиме - на 7-й ране) бой начинается заново.",
-    tr: "Çözülen rune için Şeytanlara 1 vuruş. Yanlış cevap aldığınız yaranızdır. 4. yarada (zor modda 7. yarada) savaş yeniden başlar."
+    ru: "За разгаданную руну - 1 удар по Демонам.",
+    tr: "Çözülen rune için Şeytanlara 1 vuruş."
   },
   rule3: {
-    ru: "В результате битвы вам надо получать стрелы и стать Каганом, - достигнув этого - получите ДАР.",
-    tr: "Savaş sonucunda oklar toplamalı ve Kağan olmalısınız - bunu başararak HEDİYE alacaksınız."
+    ru: "Неправильный ответ - это ваша полученная рана. На 4-ой ране (а в сложном режиме - на 7-й ране) бой начинается заново.",
+    tr: "Yanlış cevap aldığınız yaranızdır. 4. yarada (zor modda 7. yarada) savaş yeniden başlar."
+  },
+    rule4: {
+    ru: "В ходе битвы вам надо бить Демонов и стать Каганом, - достигнув этого - получите ДАР.",
+    tr: "Savaş sırasında Şeytanları dövmeli ve Kağan olmalısınız - bunu başararak HEDİYE alacaksınız."
   },
   startButton: {
     ru: "Начать бой с Демонами!",
