@@ -19,11 +19,11 @@ export const translations = {
     tr: "Rune resmi altında sorulara cevap veriyorsunuz."
   },
   rule2: {
-    ru: "За правильный ответ - 1 стрела. Неправильный ответ - это ваша рана. На 4-ой ране игра начинается заново.",
-    tr: "Doğru cevap için 1 ok. Yanlış cevap yaranızdır. 4. yarada oyun yeniden başlar."
+    ru: "За разгаданную руну - 1 удар по Демонам. Неправильный ответ - это ваша полученная рана. На 4-ой ране (а в сложном режиме - на 7-й ране) бой начинается заново.",
+    tr: "Çözülen rune için Şeytanlara 1 vuruş. Yanlış cevap aldığınız yaranızdır. 4. yarada (zor modda 7. yarada) savaş yeniden başlar."
   },
   rule3: {
-    ru: "В результате войны вам надо получать стрелы и стать Каганом, - достигнув этого - получите ДАР.",
+    ru: "В результате битвы вам надо получать стрелы и стать Каганом, - достигнув этого - получите ДАР.",
     tr: "Savaş sonucunda oklar toplamalı ve Kağan olmalısınız - bunu başararak HEDİYE alacaksınız."
   },
   startButton: {
@@ -57,8 +57,8 @@ export const translations = {
     tr: "Aldığınız yaralar"
   },
   arrows: {
-    ru: "Ваши стрелы",
-    tr: "Oklarınız"
+    ru: "Удары Демонам",
+    tr: "Şeytanlara vuruşlar"
   },
   status: {
     ru: "Ваш статус",
@@ -107,7 +107,7 @@ export const translations = {
 
   // End game
   warComplete: {
-    ru: "Война завершена!",
+    ru: "Битва завершена!",
     tr: "Savaş tamamlandı!"
   },
   enterTelegram: {

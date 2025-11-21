@@ -6,6 +6,39 @@ import Image from 'next/image';
 import { ClientCardData, ClickedAnswers, Stage, QuizResponse, ValidationResponse, Language } from '@/app/types';
 import { getTranslation } from '@/app/data/translations';
 
+// 12-year animal cycle
+const animalCycle = [
+  { ru: 'Мышь', tr: 'Fare' },      // Index 0 - Year 1, 13, 25, 37
+  { ru: 'Корова', tr: 'İnek' },    // Index 1 - Year 2, 14, 26, 38
+  { ru: 'Барс', tr: 'Pars' },      // Index 2 - Year 3, 15, 27, 39
+  { ru: 'Зайчиха', tr: 'Tavşan' }, // Index 3 - Year 4, 16, 28, 40
+  { ru: 'Улитка', tr: 'Salyangoz' }, // Index 4 - Year 5, 17, 29
+  { ru: 'Змея', tr: 'Yılan' },     // Index 5 - Year 6, 18, 30
+  { ru: 'Лошадь', tr: 'At' },      // Index 6 - Year 7, 19, 31
+  { ru: 'Овца', tr: 'Koyun' },     // Index 7 - Year 8, 20, 32
+  { ru: 'Умай', tr: 'Umay' },      // Index 8 - Year 9, 21, 33
+  { ru: 'Курица', tr: 'Tavuk' },   // Index 9 - Year 10, 22, 34
+  { ru: 'Собака', tr: 'Köpek' },   // Index 10 - Year 11, 23, 35
+  { ru: 'Кабаниха', tr: 'Domuz' }  // Index 11 - Year 12, 24, 36
+];
+
+function getYearAndAnimal(cardNumber: number, language: Language): string {
+  const year = cardNumber; // Card 1 = Year 1, Card 2 = Year 2, etc.
+  const animalIndex = (year - 1) % 12; // Convert to 0-based index for the cycle
+  const animal = animalCycle[animalIndex];
+  return `${language === 'ru' ? 'Год' : 'Yıl'} ${year}: ${animal[language]}`;
+}
+
+function getStrikeDeclension(count: number): string {
+  if (count % 10 === 1 && count % 100 !== 11) {
+    return 'удар';
+  } else if ([2, 3, 4].includes(count % 10) && ![12, 13, 14].includes(count % 100)) {
+    return 'удара';
+  } else {
+    return 'ударов';
+  }
+}
+
 interface CardProps {
   language?: Language;
   shuffle?: boolean | null;
@@ -130,9 +163,15 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
           copy[qIndex] = true;
           return copy;
         });
-        setFeedback(`${getTranslation('incorrect', language)} (${nextWrong}/3).`);
-        if (nextWrong >= 4) {
+        const maxWounds = mode === 'easy' ? 6 : 3;
+        setFeedback(`${getTranslation('incorrect', language)} (${nextWrong}/${maxWounds}).`);
+        if (nextWrong > maxWounds) {
+          const battleLostMessage = language === 'ru' 
+            ? 'Вы проиграли эту битву, но война с Демонами будет продолжена, если вы храбры и праведны!' // 🙏
+            : 'Bu savaşı kaybettiniz, ama Şeytanlarla savaş cesur ve doğru olduğunuz sürece devam edecek!';
+          
           setTimeout(() => {
+            alert(battleLostMessage);
             setFeedback('');
             resetQuiz();
           }, 1200);
@@ -140,7 +179,6 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
         return;
       }
 
-      setScore(s => (!mistakeOnQ[qIndex] ? s + 1 : s));
       setFeedback(getTranslation('correct', language) + '!');
 
       setTimeout(() => {
@@ -151,6 +189,9 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
           setRevealedIdx(revealedIdx + 1);
           return;
         }
+
+        // Award 1 strike when completing a rune (regardless of mistakes)
+        setScore(s => s + 1);
 
         const lastCard = cardIdx === deck.length - 1;
         if (!lastCard) {
@@ -213,26 +254,26 @@ export default function Card({ language = 'ru', shuffle = true, mode = 'easy' }:
     <>
       {stage !== 'done' && (
         <div className="bg-stone-50 border-2 border-amber-600 p-6 mb-8 shadow-lg">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="text-amber-700 font-serif font-semibold text-sm">{getTranslation('rune', language)}</div>
-              <div className="text-xl font-serif font-bold text-stone-800">{cardIdx + 1} / {deck.length}</div>
+              <div className="text-amber-700 font-serif font-semibold text-sm">{language === 'ru' ? 'Текущий год' : 'Mevcut yıl'}</div>
+              <div className="text-xl font-serif font-bold text-stone-800">{getYearAndAnimal(cardIdx + 1, language)}</div>
             </div>
             {/* <div className="text-center">
               <div className="text-amber-700 font-serif font-semibold text-sm">Вопрос</div>
               <div className="text-xl font-serif font-bold text-stone-800">{globalQuestionNumber} / {totalQuestions}</div>
             </div> */}
-            <div className="text-center">
+            {/* <div className="text-center">
               <div className="text-amber-700 font-serif font-semibold text-sm">{getTranslation('time', language)}</div>
               <div className="text-xl font-serif font-bold text-stone-800">{time} {language === 'ru' ? 'с' : 's'}</div>
-            </div>
+            </div> */}
             <div className="text-center">
               <div className="text-amber-700 font-serif font-semibold text-sm">{getTranslation('wounds', language)}</div>
-              <div className="text-xl font-serif font-bold text-stone-800">{wrongCount} / 3</div>
+              <div className="text-xl font-serif font-bold text-stone-800">{wrongCount} / {mode === 'easy' ? 6 : 3}</div>
             </div>
             <div className="text-center">
               <div className="text-amber-700 font-serif font-semibold text-sm">{getTranslation('arrows', language)}</div>
-              <div className="text-xl font-serif font-bold text-stone-800">{score} {language === 'ru' ? 'шт.' : 'adet'}</div>
+              <div className="text-xl font-serif font-bold text-stone-800">{score} {language === 'ru' ? getStrikeDeclension(score) : 'vuruş'}</div>
             </div>
                         <div className="text-center">
               <div className="text-amber-700 font-serif font-semibold text-sm">{getTranslation('status', language)}</div>

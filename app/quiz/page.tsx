@@ -13,7 +13,7 @@ function QuizContent() {
   const mode = searchParams.get('mode') || 'hard'; // Default to hard
 
   return (
-    <div className="min-h-screen bg-stone-100/80 p-8">
+    <div className="min-h-screen p-8">
       <main className="max-w-4xl mx-auto">
         <Link 
             href="/" 
@@ -24,7 +24,7 @@ function QuizContent() {
         <div className="flex items-center justify-between mb-12">
           <div className="text-center">
             <h1 className="text-4xl font-serif font-bold text-stone-800 tracking-wide">
-              {language === 'ru' ? 'Война' : 'Savaş'}
+              {language === 'ru' ? 'Битва' : 'Savaş'}
             </h1>
             <div className="w-16 h-1 bg-amber-600 mx-auto mt-2"></div>
           </div>

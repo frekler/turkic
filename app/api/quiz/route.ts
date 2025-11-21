@@ -22,12 +22,29 @@ function sortByCardNumber<T extends { id: string }>(arr: T[]): T[] {
   });
 }
 
-function filterAnswersForEasyMode(answers: { label: string; correct: boolean }[]): { label: string }[] {
+function filterAnswersForEasyMode(answers: { label: string; correct: boolean }[], cardId?: string, questionIndex?: number): { label: string }[] {
   const correctAnswer = answers.find(answer => answer.correct === true);
   const incorrectAnswers = answers.filter(answer => answer.correct === false);
   
   if (!correctAnswer || incorrectAnswers.length === 0) {
     return answers.map(a => ({ label: a.label }));
+  }
+  
+  // Special handling for Card 20
+  if (cardId === 'card-20') {
+    if (questionIndex === 0) {
+      // First question: only "согласная" and "гласная"
+      const allowedOptions = answers.filter(answer => 
+        answer.label === 'Согласная' || answer.label === 'Гласная'
+      );
+      return shuffleArray(allowedOptions).map(a => ({ label: a.label }));
+    } else if (questionIndex === 1) {
+      // Second question: only "мягкий" and "твердый"
+      const allowedOptions = answers.filter(answer => 
+        answer.label === 'Мягкий' || answer.label === 'Твердый'
+      );
+      return shuffleArray(allowedOptions).map(a => ({ label: a.label }));
+    }
   }
   
   const randomIncorrectAnswer = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
@@ -52,7 +69,7 @@ export async function GET(request: Request) {
         let processedAnswers;
         
         if (mode === 'easy') {
-          processedAnswers = filterAnswersForEasyMode(questionAnswers as { label: string; correct: boolean }[]);
+          processedAnswers = filterAnswersForEasyMode(questionAnswers as { label: string; correct: boolean }[], card.id, i);
         } else {
           processedAnswers = shuffle 
             ? shuffleArray(questionAnswers.map(a => ({ label: a.label })))
