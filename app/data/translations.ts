@@ -23,7 +23,7 @@ export const translations = {
     tr: "Çözülen rune için Şeytanlara 1 vuruş."
   },
   rule3: {
-    ru: "Неправильный ответ - это ваша полученная рана. На 4-ой ране (а в сложном режиме - на 7-й ране) бой начинается заново.",
+    ru: "Неправильный ответ - это ваша полученная рана. На 7-й ране (а в сложном режиме - на 4-й ране) бой начинается заново.",
     tr: "Yanlış cevap aldığınız yaranızdır. 4. yarada (zor modda 7. yarada) savaş yeniden başlar."
   },
     rule4: {
